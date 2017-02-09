@@ -12,6 +12,8 @@
 		5077C7751E3BDE2A002BEC7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5077C7731E3BDE2A002BEC7F /* Main.storyboard */; };
 		5077C7771E3BDE2A002BEC7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5077C7761E3BDE2A002BEC7F /* Assets.xcassets */; };
 		5077C77A1E3BDE2A002BEC7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5077C7781E3BDE2A002BEC7F /* LaunchScreen.storyboard */; };
+		508E29861E4A0C5100DA791B /* customButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508E29851E4A0C5100DA791B /* customButton.swift */; };
+		508E29881E4A146E00DA791B /* customLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508E29871E4A146E00DA791B /* customLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		5077C7761E3BDE2A002BEC7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5077C7791E3BDE2A002BEC7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5077C77B1E3BDE2A002BEC7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		508E29851E4A0C5100DA791B /* customButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customButton.swift; sourceTree = "<group>"; };
+		508E29871E4A146E00DA791B /* customLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				5077C76F1E3BDE2A002BEC7F /* AppDelegate.swift */,
+				508E29851E4A0C5100DA791B /* customButton.swift */,
+				508E29871E4A146E00DA791B /* customLabel.swift */,
 				5077C7711E3BDE2A002BEC7F /* ViewController.swift */,
 				5077C7731E3BDE2A002BEC7F /* Main.storyboard */,
 				5077C7761E3BDE2A002BEC7F /* Assets.xcassets */,
@@ -139,6 +145,8 @@
 			files = (
 				5077C7721E3BDE2A002BEC7F /* ViewController.swift in Sources */,
 				5077C7701E3BDE2A002BEC7F /* AppDelegate.swift in Sources */,
+				508E29861E4A0C5100DA791B /* customButton.swift in Sources */,
+				508E29881E4A146E00DA791B /* customLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,7 +270,7 @@
 				DEVELOPMENT_TEAM = E5UA8327Y8;
 				INFOPLIST_FILE = simpleGuessNumber/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Novex.simpleGuessNumber;
+				PRODUCT_BUNDLE_IDENTIFIER = Novex.simGuessNumber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -275,7 +283,7 @@
 				DEVELOPMENT_TEAM = E5UA8327Y8;
 				INFOPLIST_FILE = simpleGuessNumber/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Novex.simpleGuessNumber;
+				PRODUCT_BUNDLE_IDENTIFIER = Novex.simGuessNumber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -300,6 +308,7 @@
 				5077C7801E3BDE2A002BEC7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

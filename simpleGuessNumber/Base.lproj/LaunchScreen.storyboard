@@ -18,22 +18,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Novex" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvc-GD-JGO">
-                                <frame key="frameInset" minX="16" minY="285" width="343" height="97"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Novex" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvc-GD-JGO">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="4nA-fO-P1g"/>
+                                    <constraint firstAttribute="height" constant="97" id="fMC-l1-PWa"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="70"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Novex" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-Ef-1Xm">
-                                <frame key="frameInset" minX="16" minY="285" width="343" height="97"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Novex" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-Ef-1Xm">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="97" id="kRC-p4-JvG"/>
+                                    <constraint firstAttribute="width" constant="343" id="qXe-dj-E5R"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="69"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="hvc-GD-JGO" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="XmS-9Y-yUg"/>
+                            <constraint firstItem="hwZ-Ef-1Xm" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bpr-dy-zcQ"/>
+                            <constraint firstItem="hwZ-Ef-1Xm" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="taS-y1-0J8"/>
+                            <constraint firstItem="hvc-GD-JGO" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="x0t-wd-O4R"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

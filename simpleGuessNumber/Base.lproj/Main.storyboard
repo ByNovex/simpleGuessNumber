@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="simpleGuessNumber" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +17,162 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y2q-Bb-mNf"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Piensa en un número entre el 1000 y el 1000 y lo adivinaré en menos de 10 intentos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6U-Nv-Ob2" customClass="customLabel" customModule="simpleGuessNumber" customModuleProvider="target">
+                                <frame key="frameInset" minX="16" minY="131" width="343" height="157"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="157" id="I2b-a8-UGC"/>
+                                    <constraint firstAttribute="width" constant="343" id="TNY-wZ-KBe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Es este numero si o que" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnq-sw-DH3" customClass="customLabel" customModule="simpleGuessNumber" customModuleProvider="target">
+                                <frame key="frameInset" minX="16" minY="367" width="343" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="F6W-sc-4OA"/>
+                                    <constraint firstAttribute="width" constant="343" id="miQ-CU-85e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="27"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GuessNumber" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oe-Ry-DrX">
+                                <frame key="frameInset" minX="16" minY="28" width="343" height="95"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="hHo-h4-WDg"/>
+                                    <constraint firstAttribute="width" constant="343" id="tcN-nd-wnB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="45"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jrj-mO-8Io" customClass="customButton" customModule="simpleGuessNumber" customModuleProvider="target">
+                                <frame key="frameInset" minX="132" minY="296" width="111" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="GgY-4F-hMK"/>
+                                    <constraint firstAttribute="width" constant="111" id="m0X-ha-XqC"/>
+                                </constraints>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="OK">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="32" name="Power-Green-Small"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="okAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wc4-1J-pwP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRM-5z-o3d" customClass="customButton" customModule="simpleGuessNumber" customModuleProvider="target">
+                                <frame key="frameInset" minX="83" minY="572" width="209" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="Tac-D9-QXX"/>
+                                    <constraint firstAttribute="width" constant="209" id="wGQ-oD-cQH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="32"/>
+                                <state key="normal" title="CORRECTO!">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="correctioAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mKC-8l-N8i"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQd-8n-aJy">
+                                <frame key="frameInset" minX="37" minY="509" width="300" height="75"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijF-1w-Lr2" customClass="customButton" customModule="simpleGuessNumber" customModuleProvider="target">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="UGs-4h-yA3"/>
+                                            <constraint firstAttribute="height" constant="75" id="UkQ-sG-g3D"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="40"/>
+                                        <state key="normal" title="MAYOR">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="mayorAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="juE-fW-4Pv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z94-B5-uIg" customClass="customButton" customModule="simpleGuessNumber" customModuleProvider="target">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="NQI-p9-6c6"/>
+                                            <constraint firstAttribute="height" constant="75" id="ssw-0y-HrL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="40"/>
+                                        <state key="normal" title="MENOR">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="menorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Kf-dE-sx2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="hVA-nu-gnI"/>
+                                    <constraint firstItem="z94-B5-uIg" firstAttribute="leading" secondItem="ijF-1w-Lr2" secondAttribute="trailing" id="nZp-ak-RKn"/>
+                                    <constraint firstAttribute="width" constant="300" id="vXW-uw-RCj"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJm-G5-1iI">
+                                <frame key="frameInset" minX="109" minY="402" width="157" height="89"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="157" id="F2W-7e-vTr"/>
+                                    <constraint firstAttribute="height" constant="89" id="Nd0-pZ-bac"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AcademyEngravedLetPlain" family="Academy Engraved LET" pointSize="60"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="4oe-Ry-DrX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="250" id="1bZ-cf-YFY"/>
+                            <constraint firstItem="Q6U-Nv-Ob2" firstAttribute="top" secondItem="4oe-Ry-DrX" secondAttribute="bottom" constant="8" id="2oj-Dj-rgs"/>
+                            <constraint firstItem="nQd-8n-aJy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4em-Zf-nE4"/>
+                            <constraint firstItem="nQd-8n-aJy" firstAttribute="top" secondItem="jJm-G5-1iI" secondAttribute="bottom" constant="-10" id="6vS-kU-UKm"/>
+                            <constraint firstItem="y2q-Bb-mNf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="AAk-aa-N9U"/>
+                            <constraint firstItem="fnq-sw-DH3" firstAttribute="top" secondItem="Q6U-Nv-Ob2" secondAttribute="bottom" constant="79" id="Boo-nE-jSH"/>
+                            <constraint firstItem="Jrj-mO-8Io" firstAttribute="top" secondItem="Q6U-Nv-Ob2" secondAttribute="bottom" constant="8" id="Ibh-Us-zZQ"/>
+                            <constraint firstItem="Q6U-Nv-Ob2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LAi-mF-D4K"/>
+                            <constraint firstItem="fnq-sw-DH3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RW4-F3-N3d"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="y2q-Bb-mNf" secondAttribute="bottom" id="W3b-Oe-t3p"/>
+                            <constraint firstAttribute="trailing" secondItem="y2q-Bb-mNf" secondAttribute="trailing" id="WUH-2Z-ii9"/>
+                            <constraint firstItem="y2q-Bb-mNf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aZu-jz-8A4"/>
+                            <constraint firstItem="jRM-5z-o3d" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ba9-AD-uZw"/>
+                            <constraint firstItem="jJm-G5-1iI" firstAttribute="top" secondItem="fnq-sw-DH3" secondAttribute="bottom" constant="8" id="cOf-6C-dPa"/>
+                            <constraint firstItem="4oe-Ry-DrX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gHT-hI-oT9"/>
+                            <constraint firstItem="fnq-sw-DH3" firstAttribute="top" secondItem="Jrj-mO-8Io" secondAttribute="bottom" constant="-4" id="ktD-SD-GoO"/>
+                            <constraint firstItem="jRM-5z-o3d" firstAttribute="top" secondItem="fnq-sw-DH3" secondAttribute="bottom" constant="178" id="pBt-oM-icn"/>
+                            <constraint firstItem="jJm-G5-1iI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pPa-XY-Z2M"/>
+                            <constraint firstItem="Jrj-mO-8Io" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="t4t-Rl-q9M"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="background" destination="y2q-Bb-mNf" id="rok-g4-Aar"/>
+                        <outlet property="buttonOK" destination="Jrj-mO-8Io" id="bW3-1e-OYy"/>
+                        <outlet property="correctoButton" destination="jRM-5z-o3d" id="9bx-5J-GwC"/>
+                        <outlet property="correctoButtonY" destination="pBt-oM-icn" id="K5l-Gd-CEd"/>
+                        <outlet property="guessLabel" destination="fnq-sw-DH3" id="sLB-Ui-fbq"/>
+                        <outlet property="guessLabelY" destination="Boo-nE-jSH" id="nVj-7n-8hP"/>
+                        <outlet property="guessNumberTitle" destination="4oe-Ry-DrX" id="fkZ-5z-WdK"/>
+                        <outlet property="guessNumberY" destination="1bZ-cf-YFY" id="xjg-0Z-eve"/>
+                        <outlet property="infoLabel" destination="Q6U-Nv-Ob2" id="VWA-yy-wiL"/>
+                        <outlet property="mayorButton" destination="ijF-1w-Lr2" id="vXQ-By-msl"/>
+                        <outlet property="menorButton" destination="z94-B5-uIg" id="YRb-T9-AiF"/>
+                        <outlet property="numberLabel" destination="jJm-G5-1iI" id="dEB-72-v2K"/>
+                        <outlet property="stackOut" destination="nQd-8n-aJy" id="6Hc-sy-v3r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="352.80000000000001" y="144.3778110944528"/>
         </scene>
     </scenes>
 </document>
