@@ -86,7 +86,7 @@ class ViewController: UIViewController {
     var minNumber = 0
     var avgNumber = 0
     var tryNumber = 0
-    var anotherOneText = false
+    var isAnotherOneText = false
     var constantRightButtonConstraintY: CGFloat!
     var constantTryLabelConstraintY: CGFloat!
     //--------------------------------------------------------------
@@ -121,76 +121,81 @@ class ViewController: UIViewController {
         calculateNum()
     }
     @IBAction func rightButtonAction(_ sender: AnyObject) {
-        if (anotherOneText) {anotherOneGame()}
+        if (isAnotherOneText) {anotherOneGame()}
         else {endGame(userWins: false)}
     }
     //--------------------------------------------------------------
     //FUNCIONES
     //--------------------------------------------------------------
-    func endGame(userWins:Bool){
-        setTextEndGame(win: userWins)
-        endGameAnimation()
-    }
     
-    func endGameAnimation(){
-        UIView.animate(withDuration: 1.0, animations: {self.desappearStackButtonsNumberLabel()})
-        { (true) in
-            UIView.animate(withDuration: 1.0, animations: {self.moveRightButton()})
-            self.changeRightButtonText()
-        }
+    func initApp(){
+        initBackground()
+        initGame()
     }
-    
-    func changeRightButtonText() {
-        self.rightButton.setTitle("Otra?", for: .normal)
-        self.anotherOneText = true
+    func initBackground(){
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.red.cgColor,UIColor.yellow.cgColor,UIColor.green.cgColor,UIColor.blue.cgColor]
+        gradient.endPoint = pointEnd
+        gradient.startPoint = pointStart
+        background.layer.insertSublayer(gradient, at: 0)
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(backgroundEffect), userInfo: nil, repeats: true)
     }
-    func desappearStackButtonsNumberLabel(){
-        self.stackButtons.alpha = 0.0
-        self.numberLabel.alpha = 0.0
-    }
-    
-    func moveRightButton() {
-        self.rightButtonConstraintY.constant = 5
-        self.view.layoutIfNeeded()
-    }
-    
-    func setTextEndGame(win:Bool){
-        if(win){tryLabel.text = "YOU WIN!"}
-        else {tryLabel.text = "Im the best"}
+    func initGame() {
+        setAlphaTo0()
+        getMinMax()
+        setInfo()
+        titleAnimation()
     }
     
     func anotherOneGame() {
-        getMinMax()
-        tryNumber = 0
-        anotherOneText = false
-        okButton.isEnabled = true
+        prepareAnotherGame()
         UIView.animate(withDuration: 0.3, animations: {
             self.setAlphaTo0()
             self.view.layoutIfNeeded()
         }) { (true) in
-            self.setInfo()
-            self.rightButtonConstraintY.constant = self.constantRightButtonConstraintY
-            self.tryLabelConstraintY.constant = self.constantTryLabelConstraintY
-            self.rightButton.setTitle("Correcto!", for: .normal)
+            self.prepareGame()
             UIView.animate(withDuration: 0.3, animations: {
                 self.view.layoutIfNeeded()
                 }, completion: { (true) in
-                    UIView.animate(withDuration: 0.5, delay: 1.0, options: .curveEaseIn, animations: {
-                        self.okButton.alpha = 1.0
-                        self.infoLabel.alpha = 1.0
-                        }, completion: nil)
+                    self.appearInfoLabelOkButton()
                     
             })
         }
         
     }
+    func endGame(userWins:Bool){
+        setTextEndGame(win: userWins)
+        endGameAnimation()
+    }
     
+    
+    
+    func prepareAnotherGame(){
+        getMinMax()
+        tryNumber = 0
+        isAnotherOneText = false
+        okButton.isEnabled = true
+    }
+    func prepareGame() {
+        self.setInfo()
+        self.rightButtonConstraintY.constant = self.constantRightButtonConstraintY
+        self.tryLabelConstraintY.constant = self.constantTryLabelConstraintY
+        self.rightButton.setTitle("Correcto!", for: .normal)
+    }
+    
+    func changeRightButtonText() {
+        self.rightButton.setTitle("Otra?", for: .normal)
+        self.isAnotherOneText = true
+    }
+    func setTextEndGame(win:Bool){
+        if(win){tryLabel.text = "YOU WIN!"}
+        else {tryLabel.text = "Im the best"}
+    }
     func setNumberAndTry(){
         tryLabel.text = "\(tryNumber)"
         avgNumber = Int((maxNumber + minNumber)/2)
         numberLabel.text = "\(avgNumber)"
     }
-    
     func calculateNum(){
         tryNumber += 1
         if (tryNumber < 11) {
@@ -200,34 +205,6 @@ class ViewController: UIViewController {
             endGame(userWins: true)
         }
     }
-    func initGame() {
-        setAlphaTo0()
-        getMinMax()
-        setInfo()
-        titleAnimation()
-    }
-    
-    func titleAnimation() {
-        titleLabel.center.y = 1000
-        UIView.animate(withDuration: 2.0, animations: {
-            self.view.layoutIfNeeded()
-        }) { (true) in
-            self.titleLabelConstraintY.constant = 5
-            UIView.animate(withDuration: 1.5, animations: {
-                self.view.layoutIfNeeded()
-                }, completion: { (true) in
-                    self.appearTitleLabelOkButton()
-            })
-        }
-    }
-    
-    func appearTitleLabelOkButton(){
-        UIView.animate(withDuration: 0.5, delay: 1.0, options: .curveEaseIn, animations: {
-            self.okButton.alpha = 1.0
-            self.infoLabel.alpha = 1.0
-            }, completion: nil)
-    }
-    
     func setAlphaTo0(){
         okButton.alpha = 0.0
         infoLabel.alpha = 0.0
@@ -239,13 +216,11 @@ class ViewController: UIViewController {
     func setInfo(){
         infoLabel.text = "Piensa en un número entre el \(minNumber) y el \(maxNumber) y lo adivinaré en menos de 10 intentos"
     }
-    
     func getMinMax() {
         minNumber = Int(arc4random_uniform(1000))
         maxNumber = Int(arc4random_uniform(1000))
         checkMinMax()
     }
-    
     func checkMinMax(){
         if (minNumber > maxNumber){
             let aux = maxNumber
@@ -263,20 +238,40 @@ class ViewController: UIViewController {
         }
     }
     
-    func initBackground()
-    {
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.red.cgColor,UIColor.yellow.cgColor,UIColor.green.cgColor,UIColor.blue.cgColor]
-        gradient.endPoint = pointEnd
-        gradient.startPoint = pointStart
-        background.layer.insertSublayer(gradient, at: 0)
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(backgroundEffect), userInfo: nil, repeats: true)
-    }
     
-    func initApp()
-    {
-        initBackground()
-        initGame()
+    func desappearStackButtonsNumberLabel(){
+        self.stackButtons.alpha = 0.0
+        self.numberLabel.alpha = 0.0
+    }
+    func moveRightButton() {
+        self.rightButtonConstraintY.constant = 5
+        self.view.layoutIfNeeded()
+    }
+    func endGameAnimation(){
+        UIView.animate(withDuration: 1.0, animations: {self.desappearStackButtonsNumberLabel()})
+        { (true) in
+            UIView.animate(withDuration: 1.0, animations: {self.moveRightButton()})
+            self.changeRightButtonText()
+        }
+    }
+    func appearInfoLabelOkButton(){
+        UIView.animate(withDuration: 0.5, delay: 1.0, options: .curveEaseIn, animations: {
+            self.okButton.alpha = 1.0
+            self.infoLabel.alpha = 1.0
+            }, completion: nil)
+    }
+    func titleAnimation() {
+        titleLabel.center.y = 1000
+        UIView.animate(withDuration: 2.0, animations: {
+            self.view.layoutIfNeeded()
+        }) { (true) in
+            self.titleLabelConstraintY.constant = 5
+            UIView.animate(withDuration: 1.5, animations: {
+                self.view.layoutIfNeeded()
+                }, completion: { (true) in
+                    self.appearInfoLabelOkButton()
+            })
+        }
     }
     func animationOKButtonPressed() {
         UIView.animate(withDuration: 1.0, animations: {
@@ -290,12 +285,10 @@ class ViewController: UIViewController {
             })
         }
     }
-    
     func desappearOKButton(){
         self.okButton.alpha = 0.0
         self.okButton.isEnabled = false
     }
-    
     func appearTryLabelNumberLabel() {
         self.tryLabel.alpha = 1.0
         self.numberLabel.alpha = 1.0
