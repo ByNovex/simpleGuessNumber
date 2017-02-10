@@ -99,8 +99,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var stackOut: UIStackView!
 
     @IBOutlet weak var buttonOK: customButton!
-    @IBOutlet weak var mayorButton: customButton!
-    @IBOutlet weak var menorButton: customButton!
     @IBOutlet weak var correctoButton: customButton!
     
     @IBOutlet weak var guessNumberTitle: UILabel!
@@ -122,8 +120,6 @@ class ViewController: UIViewController {
                     self.numberLabel.alpha = 1.0
                     
                     }, completion: { (true) in
-                        self.mayorButton.alpha = 1.0
-                        self.menorButton.alpha = 1.0
                         self.stackOut.alpha = 1.0
                         self.correctoButton.alpha = 1.0
                         let aux = self.correctoButton.center.x
@@ -243,9 +239,8 @@ class ViewController: UIViewController {
         infoLabel.alpha = 0.0
         guessLabel.alpha = 0.0
         numberLabel.alpha = 0.0
-        mayorButton.alpha = 0.0
-        menorButton.alpha = 0.0
         correctoButton.alpha = 0.0
+        stackOut.alpha = 0.0
     }
     func setInfo(){
         infoLabel.text = "Piensa en un número entre el \(min) y el \(max) y lo adivinaré en menos de 10 intentos"
@@ -271,6 +266,22 @@ class ViewController: UIViewController {
         }
     }
     
+    func initBackground()
+    {
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.red.cgColor,UIColor.yellow.cgColor,UIColor.green.cgColor,UIColor.blue.cgColor]
+        gradient.endPoint = pointEnd
+        gradient.startPoint = pointStart
+        background.layer.insertSublayer(gradient, at: 0)
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(backgroundEffect), userInfo: nil, repeats: true)
+    }
+    
+    func initApp()
+    {
+        initBackground()
+        initGame()
+    }
+    
     
     //--------------------------------------------------------------
     //METODOS
@@ -280,15 +291,8 @@ class ViewController: UIViewController {
         
         buttonCorrectoYCONTS = correctoButtonY.constant
         guessLabelYCONST = guessLabelY.constant
+        initApp()
         
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.red.cgColor,UIColor.yellow.cgColor,UIColor.green.cgColor,UIColor.blue.cgColor]
-        gradient.endPoint = pointEnd
-        gradient.startPoint = pointStart
-        background.layer.insertSublayer(gradient, at: 0)
-
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(backgroundEffect), userInfo: nil, repeats: true)
-        initGame()
     }
     //--------------------------------------------------------------
 }
