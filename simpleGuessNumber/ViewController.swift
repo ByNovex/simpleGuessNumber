@@ -96,7 +96,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var guessLabelY: NSLayoutConstraint!
     @IBOutlet weak var correctoButtonY: NSLayoutConstraint!
 
-    @IBOutlet weak var stackOut: UIStackView!
+    @IBOutlet weak var stackButtons: UIStackView!
 
     @IBOutlet weak var buttonOK: customButton!
     @IBOutlet weak var correctoButton: customButton!
@@ -120,14 +120,14 @@ class ViewController: UIViewController {
                     self.numberLabel.alpha = 1.0
                     
                     }, completion: { (true) in
-                        self.stackOut.alpha = 1.0
+                        self.stackButtons.alpha = 1.0
                         self.correctoButton.alpha = 1.0
                         let aux = self.correctoButton.center.x
-                        self.stackOut.center.x = 600
+                        self.stackButtons.center.x = 600
                         self.correctoButton.center.x = 600
                         UIView.animate(withDuration: 0.3, animations: {
                             self.correctoButton.center.x = aux
-                            self.stackOut.center.x = aux
+                            self.stackButtons.center.x = aux
                         })
                 })
             }
@@ -157,7 +157,7 @@ class ViewController: UIViewController {
     //--------------------------------------------------------------
     func endGame(){
         UIView.animate(withDuration: 1.0, animations: { 
-            self.stackOut.alpha = 0.0
+            self.stackButtons.alpha = 0.0
             self.numberLabel.alpha = 0.0
             }) { (true) in
                 
@@ -240,7 +240,7 @@ class ViewController: UIViewController {
         guessLabel.alpha = 0.0
         numberLabel.alpha = 0.0
         correctoButton.alpha = 0.0
-        stackOut.alpha = 0.0
+        stackButtons.alpha = 0.0
     }
     func setInfo(){
         infoLabel.text = "Piensa en un número entre el \(min) y el \(max) y lo adivinaré en menos de 10 intentos"

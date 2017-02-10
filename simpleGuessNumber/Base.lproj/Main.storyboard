@@ -165,7 +165,7 @@
                         <outlet property="guessNumberY" destination="1bZ-cf-YFY" id="xjg-0Z-eve"/>
                         <outlet property="infoLabel" destination="Q6U-Nv-Ob2" id="VWA-yy-wiL"/>
                         <outlet property="numberLabel" destination="jJm-G5-1iI" id="dEB-72-v2K"/>
-                        <outlet property="stackOut" destination="nQd-8n-aJy" id="6Hc-sy-v3r"/>
+                        <outlet property="stackButtons" destination="nQd-8n-aJy" id="X5M-wo-tyj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
