@@ -82,19 +82,19 @@ class ViewController: UIViewController {
     //--------------------------------------------------------------
     //VARIABLES
     //--------------------------------------------------------------
-    var max = 0
-    var min = 0
-    var avg = 0
-    var intento = 0
-    var otra = false
-    var buttonCorrectoYCONTS: CGFloat!
-    var guessLabelYCONST: CGFloat!
+    var maxNumber = 0
+    var minNumber = 0
+    var avgNumber = 0
+    var tryNumber = 0
+    var anotherOne = false
+    var constantRightButtonConstraintY: CGFloat!
+    var constantTryLabelConstraintY: CGFloat!
     //--------------------------------------------------------------
     //OBJETOS
     //--------------------------------------------------------------
-    @IBOutlet weak var titleLabelConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tryLabelConstraint: NSLayoutConstraint!
-    @IBOutlet weak var rightButtonYConstraint: NSLayoutConstraint!
+    @IBOutlet weak var titleLabelConstraintY: NSLayoutConstraint!
+    @IBOutlet weak var tryLabelConstraintY: NSLayoutConstraint!
+    @IBOutlet weak var rightButtonConstraintY: NSLayoutConstraint!
 
     @IBOutlet weak var stackButtons: UIStackView!
     @IBOutlet weak var okButton: customButton!
@@ -110,40 +110,50 @@ class ViewController: UIViewController {
     @IBAction func okAction(_ sender: AnyObject) {
         
         UIView.animate(withDuration: 1.0, animations: {
-            self.okButton.alpha = 0.0
-            self.okButton.isEnabled = false
+            self.desappearOKButton()
             }) { (true) in
-                self.tryLabelConstraint.constant = 5
+                self.tryLabelConstraintY.constant = 5
                 UIView.animate(withDuration: 1.0, animations: { 
-                    self.tryLabel.alpha = 1.0
-                    self.numberLabel.alpha = 1.0
-                    
+                    self.appearTryLabelNumberLabel()
                     }, completion: { (true) in
-                        self.stackButtons.alpha = 1.0
-                        self.rightButton.alpha = 1.0
-                        let aux = self.rightButton.center.x
-                        self.stackButtons.center.x = 600
-                        self.rightButton.center.x = 600
-                        UIView.animate(withDuration: 0.3, animations: {
-                            self.rightButton.center.x = aux
-                            self.stackButtons.center.x = aux
-                        })
+                        self.animationButtons()
                 })
             }
-        
         calculateNum()
         }
+    
+    func desappearOKButton(){
+        self.okButton.alpha = 0.0
+        self.okButton.isEnabled = false
+    }
+    
+    func appearTryLabelNumberLabel() {
+        self.tryLabel.alpha = 1.0
+        self.numberLabel.alpha = 1.0
+    }
+    func animationButtons(){
+        self.stackButtons.alpha = 1.0
+        self.rightButton.alpha = 1.0
+        let aux = self.rightButton.center.x
+        self.stackButtons.center.x = 600
+        self.rightButton.center.x = 600
+        UIView.animate(withDuration: 0.3, animations: {
+            self.rightButton.center.x = aux
+            self.stackButtons.center.x = aux
+        })
+    }
+    
     @IBAction func mayorAction(_ sender: AnyObject) {
-        min = avg
+        minNumber = avgNumber
         calculateNum()
     }
     @IBAction func menorButton(_ sender: AnyObject) {
-        max = avg
+        maxNumber = avgNumber
         calculateNum()
     }
     @IBAction func correctioAction(_ sender: AnyObject) {
-        if (otra) {
-            anotherOne()
+        if (anotherOne) {
+            anotherOneGame()
         }
         else{
             tryLabel.text = "Im the best"
@@ -161,26 +171,27 @@ class ViewController: UIViewController {
             }) { (true) in
                 
                 UIView.animate(withDuration: 1.0, animations: {
-                    self.rightButtonYConstraint.constant = 5
+                    self.rightButtonConstraintY.constant = 5
                     self.view.layoutIfNeeded()
                 })
                 self.rightButton.setTitle("Otra?", for: .normal)
-                self.otra = true
+                self.anotherOne = true
         }
         
     }
-    func anotherOne(){
+    
+    func anotherOneGame() {
         getMinMax()
-        intento = 0
-        otra = false
+        tryNumber = 0
+        anotherOne = false
         okButton.isEnabled = true
         UIView.animate(withDuration: 0.3, animations: {
             self.setAlphaTo0()
             self.view.layoutIfNeeded()
         }) { (true) in
             self.setInfo()
-            self.rightButtonYConstraint.constant = self.buttonCorrectoYCONTS
-            self.tryLabelConstraint.constant = self.guessLabelYCONST
+            self.rightButtonConstraintY.constant = self.constantRightButtonConstraintY
+            self.tryLabelConstraintY.constant = self.constantTryLabelConstraintY
             self.rightButton.setTitle("Correcto!", for: .normal)
             UIView.animate(withDuration: 0.3, animations: {
                 self.view.layoutIfNeeded()
@@ -194,12 +205,17 @@ class ViewController: UIViewController {
         }
         
     }
+    
+    func setNumberAndTry(){
+        tryLabel.text = "\(tryNumber)"
+        avgNumber = Int((maxNumber + minNumber)/2)
+        numberLabel.text = "\(avgNumber)"
+    }
+    
     func calculateNum(){
-        intento += 1
-        if (intento != 10) {
-            tryLabel.text = "\(intento)"
-            avg = Int((max + min)/2)
-            numberLabel.text = "\(avg)"
+        tryNumber += 1
+        if (tryNumber < 11) {
+            setNumberAndTry()
         }
         else{
             tryLabel.text = "YOU WIN!"
@@ -218,7 +234,7 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 2.0, animations: {
             self.view.layoutIfNeeded()
         }) { (true) in
-            self.titleLabelConstraint.constant = 5
+            self.titleLabelConstraintY.constant = 5
             UIView.animate(withDuration: 1.5, animations: {
                 self.view.layoutIfNeeded()
                 }, completion: { (true) in
@@ -243,28 +259,28 @@ class ViewController: UIViewController {
         stackButtons.alpha = 0.0
     }
     func setInfo(){
-        infoLabel.text = "Piensa en un número entre el \(min) y el \(max) y lo adivinaré en menos de 10 intentos"
+        infoLabel.text = "Piensa en un número entre el \(minNumber) y el \(maxNumber) y lo adivinaré en menos de 10 intentos"
     }
     
     func getMinMax() {
-        min = Int(arc4random_uniform(1000))
-        max = Int(arc4random_uniform(1000))
+        minNumber = Int(arc4random_uniform(1000))
+        maxNumber = Int(arc4random_uniform(1000))
         checkMinMax()
     }
     
     func checkMinMax(){
-        if (min > max){
-            let aux = max
-            max = min
-            min = aux
+        if (minNumber > maxNumber){
+            let aux = maxNumber
+            maxNumber = minNumber
+            minNumber = aux
         }
         //Almenos con 100 numeros de diferencia
-        if (max - min < 100){
-            if (max > 500){
-                min -= 100
+        if (maxNumber - minNumber < 100){
+            if (maxNumber > 500){
+                minNumber -= 100
             }
             else {
-                max += 100
+                maxNumber += 100
             }
         }
     }
@@ -292,8 +308,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        buttonCorrectoYCONTS = rightButtonYConstraint.constant
-        guessLabelYCONST = tryLabelConstraint.constant
+        constantRightButtonConstraintY = rightButtonConstraintY.constant
+        constantTryLabelConstraintY = tryLabelConstraintY.constant
         initApp()
         
     }
