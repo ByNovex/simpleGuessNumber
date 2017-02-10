@@ -97,13 +97,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var correctoButtonY: NSLayoutConstraint!
 
     @IBOutlet weak var stackButtons: UIStackView!
-
-    @IBOutlet weak var buttonOK: customButton!
-    @IBOutlet weak var correctoButton: customButton!
+    @IBOutlet weak var okButton: customButton!
+    @IBOutlet weak var rightButton: customButton!
     
-    @IBOutlet weak var guessNumberTitle: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var infoLabel: customLabel!
-    @IBOutlet weak var guessLabel: customLabel!
+    @IBOutlet weak var tryLabel: customLabel!
     @IBOutlet weak var numberLabel: UILabel!
     //--------------------------------------------------------------
     //FUNCIONES BUTTON
@@ -111,22 +110,22 @@ class ViewController: UIViewController {
     @IBAction func okAction(_ sender: AnyObject) {
         
         UIView.animate(withDuration: 1.0, animations: {
-            self.buttonOK.alpha = 0.0
-            self.buttonOK.isEnabled = false
+            self.okButton.alpha = 0.0
+            self.okButton.isEnabled = false
             }) { (true) in
                 self.guessLabelY.constant = 5
                 UIView.animate(withDuration: 1.0, animations: { 
-                    self.guessLabel.alpha = 1.0
+                    self.tryLabel.alpha = 1.0
                     self.numberLabel.alpha = 1.0
                     
                     }, completion: { (true) in
                         self.stackButtons.alpha = 1.0
-                        self.correctoButton.alpha = 1.0
-                        let aux = self.correctoButton.center.x
+                        self.rightButton.alpha = 1.0
+                        let aux = self.rightButton.center.x
                         self.stackButtons.center.x = 600
-                        self.correctoButton.center.x = 600
+                        self.rightButton.center.x = 600
                         UIView.animate(withDuration: 0.3, animations: {
-                            self.correctoButton.center.x = aux
+                            self.rightButton.center.x = aux
                             self.stackButtons.center.x = aux
                         })
                 })
@@ -147,7 +146,7 @@ class ViewController: UIViewController {
             anotherOne()
         }
         else{
-            guessLabel.text = "Im the best"
+            tryLabel.text = "Im the best"
             endGame()
         }
         
@@ -165,7 +164,7 @@ class ViewController: UIViewController {
                     self.correctoButtonY.constant = 5
                     self.view.layoutIfNeeded()
                 })
-                self.correctoButton.setTitle("Otra?", for: .normal)
+                self.rightButton.setTitle("Otra?", for: .normal)
                 self.otra = true
         }
         
@@ -174,7 +173,7 @@ class ViewController: UIViewController {
         comprobarMinMax()
         intento = 0
         otra = false
-        buttonOK.isEnabled = true
+        okButton.isEnabled = true
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha0()
             self.view.layoutIfNeeded()
@@ -182,12 +181,12 @@ class ViewController: UIViewController {
             self.setInfo()
             self.correctoButtonY.constant = self.buttonCorrectoYCONTS
             self.guessLabelY.constant = self.guessLabelYCONST
-            self.correctoButton.setTitle("Correcto!", for: .normal)
+            self.rightButton.setTitle("Correcto!", for: .normal)
             UIView.animate(withDuration: 0.3, animations: {
                 self.view.layoutIfNeeded()
                 }, completion: { (true) in
                     UIView.animate(withDuration: 0.5, delay: 1.0, options: .curveEaseIn, animations: {
-                        self.buttonOK.alpha = 1.0
+                        self.okButton.alpha = 1.0
                         self.infoLabel.alpha = 1.0
                         }, completion: nil)
                     
@@ -198,12 +197,12 @@ class ViewController: UIViewController {
     func calculateNum(){
         intento += 1
         if (intento != 10) {
-            guessLabel.text = "\(intento)"
+            tryLabel.text = "\(intento)"
             avg = Int((max + min)/2)
             numberLabel.text = "\(avg)"
         }
         else{
-            guessLabel.text = "YOU WIN!"
+            tryLabel.text = "YOU WIN!"
             endGame()
         }
     }
@@ -217,7 +216,7 @@ class ViewController: UIViewController {
         //Este "lugar" esta marcado por los constraints.
         //Lo que si que podemos hacer es provocar nosotros este "autolayout"
         //La funcion layouIfNeeded() hace esto. Le ponemos una animación y se hará en el tiempo que dure la animación.
-        guessNumberTitle.center.y = 1000 //Hacemos esto para echar el layout abajo
+        titleLabel.center.y = 1000 //Hacemos esto para echar el layout abajo
         UIView.animate(withDuration: 1.5, animations: {
             self.view.layoutIfNeeded() //con esto volvera a donde le marque la constraint
             }) { (true) in
@@ -227,7 +226,7 @@ class ViewController: UIViewController {
                     //que quede claro que si no hacemos esto lo que pasara es que el layout se teletransportará hacia la "posicion" 5
                     }, completion: { (true) in
                         UIView.animate(withDuration: 0.5, delay: 1.0, options: .curveEaseIn, animations: {
-                            self.buttonOK.alpha = 1.0
+                            self.okButton.alpha = 1.0
                             self.infoLabel.alpha = 1.0
                             }, completion: nil)
                         
@@ -235,11 +234,11 @@ class ViewController: UIViewController {
         }
     }
     func alpha0(){
-        buttonOK.alpha = 0.0
+        okButton.alpha = 0.0
         infoLabel.alpha = 0.0
-        guessLabel.alpha = 0.0
+        tryLabel.alpha = 0.0
         numberLabel.alpha = 0.0
-        correctoButton.alpha = 0.0
+        rightButton.alpha = 0.0
         stackButtons.alpha = 0.0
     }
     func setInfo(){
