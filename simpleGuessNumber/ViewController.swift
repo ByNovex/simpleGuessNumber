@@ -92,9 +92,9 @@ class ViewController: UIViewController {
     //--------------------------------------------------------------
     //OBJETOS
     //--------------------------------------------------------------
-    @IBOutlet weak var guessNumberY: NSLayoutConstraint!
-    @IBOutlet weak var guessLabelY: NSLayoutConstraint!
-    @IBOutlet weak var correctoButtonY: NSLayoutConstraint!
+    @IBOutlet weak var titleLabelConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tryLabelConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightButtonYConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var stackButtons: UIStackView!
     @IBOutlet weak var okButton: customButton!
@@ -113,7 +113,7 @@ class ViewController: UIViewController {
             self.okButton.alpha = 0.0
             self.okButton.isEnabled = false
             }) { (true) in
-                self.guessLabelY.constant = 5
+                self.tryLabelConstraint.constant = 5
                 UIView.animate(withDuration: 1.0, animations: { 
                     self.tryLabel.alpha = 1.0
                     self.numberLabel.alpha = 1.0
@@ -161,7 +161,7 @@ class ViewController: UIViewController {
             }) { (true) in
                 
                 UIView.animate(withDuration: 1.0, animations: {
-                    self.correctoButtonY.constant = 5
+                    self.rightButtonYConstraint.constant = 5
                     self.view.layoutIfNeeded()
                 })
                 self.rightButton.setTitle("Otra?", for: .normal)
@@ -170,17 +170,17 @@ class ViewController: UIViewController {
         
     }
     func anotherOne(){
-        comprobarMinMax()
+        getMinMax()
         intento = 0
         otra = false
         okButton.isEnabled = true
         UIView.animate(withDuration: 0.3, animations: {
-            self.alpha0()
+            self.setAlphaTo0()
             self.view.layoutIfNeeded()
         }) { (true) in
             self.setInfo()
-            self.correctoButtonY.constant = self.buttonCorrectoYCONTS
-            self.guessLabelY.constant = self.guessLabelYCONST
+            self.rightButtonYConstraint.constant = self.buttonCorrectoYCONTS
+            self.tryLabelConstraint.constant = self.guessLabelYCONST
             self.rightButton.setTitle("Correcto!", for: .normal)
             UIView.animate(withDuration: 0.3, animations: {
                 self.view.layoutIfNeeded()
@@ -207,33 +207,34 @@ class ViewController: UIViewController {
         }
     }
     func initGame() {
-        alpha0()
-        comprobarMinMax()
+        setAlphaTo0()
+        getMinMax()
         setInfo()
-        intento = 0
-        //Piensa que al tener "autolayout" siempre se hará el autolayout. Esto quiere decir que 
-        //por mucho que cambiemos el posicionamiento de un layout, se volverá a poner en su lugar
-        //Este "lugar" esta marcado por los constraints.
-        //Lo que si que podemos hacer es provocar nosotros este "autolayout"
-        //La funcion layouIfNeeded() hace esto. Le ponemos una animación y se hará en el tiempo que dure la animación.
-        titleLabel.center.y = 1000 //Hacemos esto para echar el layout abajo
-        UIView.animate(withDuration: 1.5, animations: {
-            self.view.layoutIfNeeded() //con esto volvera a donde le marque la constraint
-            }) { (true) in
-                self.guessNumberY.constant = 5 //movemos la constraint hacia arriba
-                UIView.animate(withDuration: 1.5, animations: { 
-                    self.view.layoutIfNeeded()//se movera hacia la nueva posicion de constraint
-                    //que quede claro que si no hacemos esto lo que pasara es que el layout se teletransportará hacia la "posicion" 5
-                    }, completion: { (true) in
-                        UIView.animate(withDuration: 0.5, delay: 1.0, options: .curveEaseIn, animations: {
-                            self.okButton.alpha = 1.0
-                            self.infoLabel.alpha = 1.0
-                            }, completion: nil)
-                        
-                })
+        titleAnimation()
+    }
+    
+    func titleAnimation() {
+        titleLabel.center.y = 1000
+        UIView.animate(withDuration: 2.0, animations: {
+            self.view.layoutIfNeeded()
+        }) { (true) in
+            self.titleLabelConstraint.constant = 5
+            UIView.animate(withDuration: 1.5, animations: {
+                self.view.layoutIfNeeded()
+                }, completion: { (true) in
+                    self.appearTitleLabelOkButton()
+            })
         }
     }
-    func alpha0(){
+    
+    func appearTitleLabelOkButton(){
+        UIView.animate(withDuration: 0.5, delay: 1.0, options: .curveEaseIn, animations: {
+            self.okButton.alpha = 1.0
+            self.infoLabel.alpha = 1.0
+            }, completion: nil)
+    }
+    
+    func setAlphaTo0(){
         okButton.alpha = 0.0
         infoLabel.alpha = 0.0
         tryLabel.alpha = 0.0
@@ -244,17 +245,20 @@ class ViewController: UIViewController {
     func setInfo(){
         infoLabel.text = "Piensa en un número entre el \(min) y el \(max) y lo adivinaré en menos de 10 intentos"
     }
-    func comprobarMinMax() {
-        //Miramos quien es mayor y menor; y almenos con 100 numeros de diferencia
+    
+    func getMinMax() {
         min = Int(arc4random_uniform(1000))
         max = Int(arc4random_uniform(1000))
+        checkMinMax()
+    }
+    
+    func checkMinMax(){
         if (min > max){
             let aux = max
             max = min
             min = aux
-        } //else min <= max
-        
-        
+        }
+        //Almenos con 100 numeros de diferencia
         if (max - min < 100){
             if (max > 500){
                 min -= 100
@@ -288,8 +292,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        buttonCorrectoYCONTS = correctoButtonY.constant
-        guessLabelYCONST = guessLabelY.constant
+        buttonCorrectoYCONTS = rightButtonYConstraint.constant
+        guessLabelYCONST = tryLabelConstraint.constant
         initApp()
         
     }

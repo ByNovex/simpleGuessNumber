@@ -156,16 +156,16 @@
                     </view>
                     <connections>
                         <outlet property="background" destination="y2q-Bb-mNf" id="rok-g4-Aar"/>
-                        <outlet property="correctoButtonY" destination="pBt-oM-icn" id="K5l-Gd-CEd"/>
-                        <outlet property="guessLabelY" destination="Boo-nE-jSH" id="nVj-7n-8hP"/>
-                        <outlet property="guessNumberY" destination="1bZ-cf-YFY" id="xjg-0Z-eve"/>
                         <outlet property="infoLabel" destination="Q6U-Nv-Ob2" id="VWA-yy-wiL"/>
                         <outlet property="numberLabel" destination="jJm-G5-1iI" id="dEB-72-v2K"/>
                         <outlet property="okButton" destination="Jrj-mO-8Io" id="bW3-1e-OYy"/>
                         <outlet property="rightButton" destination="jRM-5z-o3d" id="9bx-5J-GwC"/>
+                        <outlet property="rightButtonYConstraint" destination="pBt-oM-icn" id="K5l-Gd-CEd"/>
                         <outlet property="stackButtons" destination="nQd-8n-aJy" id="X5M-wo-tyj"/>
                         <outlet property="titleLabel" destination="4oe-Ry-DrX" id="fkZ-5z-WdK"/>
+                        <outlet property="titleLabelConstraint" destination="1bZ-cf-YFY" id="xjg-0Z-eve"/>
                         <outlet property="tryLabel" destination="fnq-sw-DH3" id="sLB-Ui-fbq"/>
+                        <outlet property="tryLabelConstraint" destination="Boo-nE-jSH" id="nVj-7n-8hP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
