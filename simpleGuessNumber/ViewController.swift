@@ -10,78 +10,75 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    //-------------------------FOR GRADIENT-------------------------
+    //-------------------------FOR BACKGROUND-------------------------
     @IBOutlet weak var background: UIImageView!
-    var indX = 0.0;
-    var indY = 0.0;
-    var indXE = 1.0;
-    var indYE = 1.0;
+    var pointStart = CGPoint(x: 0.0, y: 0.0)
+    var pointEnd = CGPoint(x: 1.0, y: 1.0)
+    var phase = 0
     let gradient = CAGradientLayer()
-    var aux = false
-    var i = 0
-    func changeGradient(){
-        //GUARRADA!
-        
-        //Para conseguir el ejecto de "circulo" hay que subir X, subir Y, bajar X y bajar Y. En este orden.
-        //Y con el EndPoint la inversa. Bajar X, bajar Y, subir X, subir Y.
-        if (i < 10) {//Subimos X y bajamos eX
-            indX += 0.1
-            indXE -= 0.1
-            i += 1
-            
-            if (i == 10){indXE = 0.0}
-            gradient.endPoint = CGPoint(x: indXE, y: indYE)
-            gradient.startPoint = CGPoint(x: indX, y: indY)
-            
-            //            coord.text = "\(indX) \(indY)"
-            //            coordE.text = "\(indXE) \(indYE)"
-            
+
+    func backgroundEffect()
+    {
+        getCurrentPhase()
+        switch phase {
+        case 1:
+            phaseOne()
+        case 2:
+            phaseTwo()
+        case 3:
+            phaseThree()
+        default:
+            phaseFour()
         }
-        else if (i < 20){//Subimos Y y bajamos eY
-            indY += 0.1
-            indYE -= 0.1
-            i += 1
-            
-            if (i == 20){indYE = 0.0}
-            gradient.endPoint = CGPoint(x: indXE, y: indYE)
-            gradient.startPoint = CGPoint(x: indX, y: indY)
-            
-            //            coord.text = "\(indX) \(indY)"
-            //            coordE.text = "\(indXE) \(indYE)"
-            
-        }
-        else if (i < 30){//Bajamos X y subimos eX
-            indX -= 0.1
-            indXE += 0.1
-            i += 1
-            
-            if (i == 30){indX = 0.0}
-            gradient.endPoint = CGPoint(x: indXE, y: indYE)
-            gradient.startPoint = CGPoint(x: indX, y: indY)
-            //            coord.text = "\(indX) \(indY)"
-            //            coordE.text = "\(indXE) \(indYE)"
-            
-            
-        }
-        else if (i < 40){//Bajamos Y y subimos eY
-            indY -= 0.1
-            indYE += 0.1
-            i += 1
-            
-            if (i == 40) {
-                i = 0;
-                indY = 0.0
-            }
-            
-            gradient.endPoint = CGPoint(x: indXE, y: indYE)
-            gradient.startPoint = CGPoint(x: indX, y: indY)
-            //            coord.text = "\(indX) \(indY)"
-            //            coordE.text = "\(indXE) \(indYE)"
-            
-        }
+        fixBugDouble(Phase: phase)
+        redrawBackground()
+    }
+    func getCurrentPhase()
+    {
+        if (pointStart.equalTo(CGPoint(x: 0.0, y: 0.0)) && pointEnd.equalTo(CGPoint(x: 1.0, y: 1.0))) {phase = 1}
+        if (pointStart.equalTo(CGPoint(x: 1.0, y: 0.0)) && pointEnd.equalTo(CGPoint(x: 0.0, y: 1.0))) {phase = 2}
+        if (pointStart.equalTo(CGPoint(x: 1.0, y: 1.0)) && pointEnd.equalTo(CGPoint(x: 0.0, y: 0.0))) {phase = 3}
+        if (pointStart.equalTo(CGPoint(x: 0.0, y: 1.0)) && pointEnd.equalTo(CGPoint(x: 1.0, y: 0.0))) {phase = 4}
+    }
+    func phaseOne()
+    {
+        pointStart.x += 0.1
+        pointEnd.x -= 0.1
+    }
+    func phaseTwo()
+    {
+        pointStart.y += 0.1
+        pointEnd.y -= 0.1
+    }
+    func phaseThree()
+    {
+        pointStart.x -= 0.1
+        pointEnd.x += 0.1
         
     }
-    //--------------------------------------------------------------
+    func phaseFour()
+    {
+        pointStart.y -= 0.1
+        pointEnd.y += 0.1
+    }
+    func redrawBackground()
+    {
+        gradient.startPoint = pointStart
+        gradient.endPoint = pointEnd
+    }
+    func fixBugDouble(Phase:Int)
+    {//Parece ser que no se suma/resta 0.1, si no que un poco más. Así que nunca llegarán a ser exactamente 0.0 o 1.0
+        switch Phase {
+        case 1:
+            if(pointEnd.x < 0.1) {pointStart.x = 1.0;pointEnd.x = 0.0}
+        case 2:
+            if (pointEnd.y < 0.1) {pointStart.y = 1.0;pointEnd.y = 0.0}
+        case 3:
+            if (pointStart.x < 0.1) {pointStart.x = 0.0; pointEnd.x = 1.0}
+        default:
+            if (pointStart.y < 0.1) {pointStart.y = 0.0; pointEnd.y = 1.0}
+        }
+    }
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     //--------------------------------------------------------------
     //VARIABLES
@@ -274,6 +271,8 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    
     //--------------------------------------------------------------
     //METODOS
     //--------------------------------------------------------------
@@ -284,26 +283,13 @@ class ViewController: UIViewController {
         guessLabelYCONST = guessLabelY.constant
         
         gradient.frame = view.bounds
-        
-//        gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor, UIColor.white.cgColor]
         gradient.colors = [UIColor.red.cgColor,UIColor.yellow.cgColor,UIColor.green.cgColor,UIColor.blue.cgColor]
-//        gradient.colors = [UIColor.init(red: 0.502, green: 0.0, blue: 0.251, alpha: 1.0).cgColor,
-//                          UIColor.init(red: 0.502, green: 0.0, blue: 0.0, alpha: 1.0).cgColor,
-//                          UIColor.init(red: 0.406, green: 0.0, blue: 0.0, alpha: 1.0).cgColor,
-//                          UIColor.init(red: 0.502, green: 0.0, blue: 0.0, alpha: 1.0).cgColor,
-//                          UIColor.init(red: 0.502, green: 0.0, blue: 0.251, alpha: 1.0).cgColor]
-
-        gradient.startPoint = CGPoint(x: indX, y: indY)
-        gradient.endPoint = CGPoint(x: indXE, y: indYE)
+        gradient.endPoint = pointEnd
+        gradient.startPoint = pointStart
         background.layer.insertSublayer(gradient, at: 0)
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(changeGradient), userInfo: nil, repeats: true)
-        initGame()
 
-        
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(backgroundEffect), userInfo: nil, repeats: true)
+        initGame()
     }
     //--------------------------------------------------------------
 }
