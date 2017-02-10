@@ -86,7 +86,7 @@ class ViewController: UIViewController {
     var minNumber = 0
     var avgNumber = 0
     var tryNumber = 0
-    var anotherOne = false
+    var anotherOneText = false
     var constantRightButtonConstraintY: CGFloat!
     var constantTryLabelConstraintY: CGFloat!
     //--------------------------------------------------------------
@@ -107,83 +107,62 @@ class ViewController: UIViewController {
     //--------------------------------------------------------------
     //FUNCIONES BUTTON
     //--------------------------------------------------------------
-    @IBAction func okAction(_ sender: AnyObject) {
-        
-        UIView.animate(withDuration: 1.0, animations: {
-            self.desappearOKButton()
-            }) { (true) in
-                self.tryLabelConstraintY.constant = 5
-                UIView.animate(withDuration: 1.0, animations: { 
-                    self.appearTryLabelNumberLabel()
-                    }, completion: { (true) in
-                        self.animationButtons()
-                })
-            }
+    @IBAction func okButtonAction(_ sender: AnyObject) {
+        animationOKButtonPressed()
         calculateNum()
-        }
-    
-    func desappearOKButton(){
-        self.okButton.alpha = 0.0
-        self.okButton.isEnabled = false
     }
     
-    func appearTryLabelNumberLabel() {
-        self.tryLabel.alpha = 1.0
-        self.numberLabel.alpha = 1.0
-    }
-    func animationButtons(){
-        self.stackButtons.alpha = 1.0
-        self.rightButton.alpha = 1.0
-        let aux = self.rightButton.center.x
-        self.stackButtons.center.x = 600
-        self.rightButton.center.x = 600
-        UIView.animate(withDuration: 0.3, animations: {
-            self.rightButton.center.x = aux
-            self.stackButtons.center.x = aux
-        })
-    }
-    
-    @IBAction func mayorAction(_ sender: AnyObject) {
+    @IBAction func highButtonAction(_ sender: AnyObject) {
         minNumber = avgNumber
         calculateNum()
     }
-    @IBAction func menorButton(_ sender: AnyObject) {
+    @IBAction func lessButtonAction(_ sender: AnyObject) {
         maxNumber = avgNumber
         calculateNum()
     }
-    @IBAction func correctioAction(_ sender: AnyObject) {
-        if (anotherOne) {
-            anotherOneGame()
-        }
-        else{
-            tryLabel.text = "Im the best"
-            endGame()
-        }
-        
+    @IBAction func rightButtonAction(_ sender: AnyObject) {
+        if (anotherOneText) {anotherOneGame()}
+        else {endGame(userWins: false)}
     }
     //--------------------------------------------------------------
     //FUNCIONES
     //--------------------------------------------------------------
-    func endGame(){
-        UIView.animate(withDuration: 1.0, animations: { 
-            self.stackButtons.alpha = 0.0
-            self.numberLabel.alpha = 0.0
-            }) { (true) in
-                
-                UIView.animate(withDuration: 1.0, animations: {
-                    self.rightButtonConstraintY.constant = 5
-                    self.view.layoutIfNeeded()
-                })
-                self.rightButton.setTitle("Otra?", for: .normal)
-                self.anotherOne = true
+    func endGame(userWins:Bool){
+        setTextEndGame(win: userWins)
+        endGameAnimation()
+    }
+    
+    func endGameAnimation(){
+        UIView.animate(withDuration: 1.0, animations: {self.desappearStackButtonsNumberLabel()})
+        { (true) in
+            UIView.animate(withDuration: 1.0, animations: {self.moveRightButton()})
+            self.changeRightButtonText()
         }
-        
+    }
+    
+    func changeRightButtonText() {
+        self.rightButton.setTitle("Otra?", for: .normal)
+        self.anotherOneText = true
+    }
+    func desappearStackButtonsNumberLabel(){
+        self.stackButtons.alpha = 0.0
+        self.numberLabel.alpha = 0.0
+    }
+    
+    func moveRightButton() {
+        self.rightButtonConstraintY.constant = 5
+        self.view.layoutIfNeeded()
+    }
+    
+    func setTextEndGame(win:Bool){
+        if(win){tryLabel.text = "YOU WIN!"}
+        else {tryLabel.text = "Im the best"}
     }
     
     func anotherOneGame() {
         getMinMax()
         tryNumber = 0
-        anotherOne = false
+        anotherOneText = false
         okButton.isEnabled = true
         UIView.animate(withDuration: 0.3, animations: {
             self.setAlphaTo0()
@@ -218,8 +197,7 @@ class ViewController: UIViewController {
             setNumberAndTry()
         }
         else{
-            tryLabel.text = "YOU WIN!"
-            endGame()
+            endGame(userWins: true)
         }
     }
     func initGame() {
@@ -300,7 +278,39 @@ class ViewController: UIViewController {
         initBackground()
         initGame()
     }
+    func animationOKButtonPressed() {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.desappearOKButton()
+        }) { (true) in
+            self.tryLabelConstraintY.constant = 5
+            UIView.animate(withDuration: 1.0, animations: {
+                self.appearTryLabelNumberLabel()
+                }, completion: { (true) in
+                    self.animationStackButtons()
+            })
+        }
+    }
     
+    func desappearOKButton(){
+        self.okButton.alpha = 0.0
+        self.okButton.isEnabled = false
+    }
+    
+    func appearTryLabelNumberLabel() {
+        self.tryLabel.alpha = 1.0
+        self.numberLabel.alpha = 1.0
+    }
+    func animationStackButtons(){
+        self.stackButtons.alpha = 1.0
+        self.rightButton.alpha = 1.0
+        let aux = self.rightButton.center.x
+        self.stackButtons.center.x = 600
+        self.rightButton.center.x = 600
+        UIView.animate(withDuration: 0.3, animations: {
+            self.rightButton.center.x = aux
+            self.stackButtons.center.x = aux
+        })
+    }
     
     //--------------------------------------------------------------
     //METODOS

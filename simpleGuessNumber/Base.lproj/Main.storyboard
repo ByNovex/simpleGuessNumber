@@ -67,7 +67,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <action selector="okAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wc4-1J-pwP"/>
+                                    <action selector="okButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wc4-1J-pwP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRM-5z-o3d" customClass="customButton" customModule="simpleGuessNumber" customModuleProvider="target">
@@ -81,7 +81,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="correctioAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mKC-8l-N8i"/>
+                                    <action selector="rightButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mKC-8l-N8i"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQd-8n-aJy">
@@ -97,7 +97,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="mayorAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="juE-fW-4Pv"/>
+                                            <action selector="highButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="juE-fW-4Pv"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z94-B5-uIg" customClass="customButton" customModule="simpleGuessNumber" customModuleProvider="target">
@@ -110,7 +110,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="menorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Kf-dE-sx2"/>
+                                            <action selector="lessButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Kf-dE-sx2"/>
                                         </connections>
                                     </button>
                                 </subviews>
